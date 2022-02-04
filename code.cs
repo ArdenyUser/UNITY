@@ -32,7 +32,8 @@ public class LineReader : MonoBehaviour
     protected FileInfo theSourceFile = null;
     protected StreamReader reader = null;
     protected string text = " "; // assigned to allow first line to be read below
-    string objmode ==
+    int objmode = 0;
+    string objsetting = "";
     
     void Start () {
         theSourceFile = new FileInfo ("Test.txt");
@@ -42,9 +43,14 @@ public class LineReader : MonoBehaviour
     void Update () {
         if (text != null) {
             text = reader.ReadLine();
-            if (objmode == "dirt") 
+            if (text == "dirt") 
             {
-                Instatiate(prefab, new Coords(VECTOR2), Quaternion.identity);
+                objmode = 1;
+                objsetting = text;
+            } 
+            if (objmode == 1) 
+            {
+                Instatiate(objsetting, new Coords(VECTOR2), Quaternion.identity);
             } 
             text = reader.ReadLine();
         }
